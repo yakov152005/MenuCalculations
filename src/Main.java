@@ -53,13 +53,13 @@ public class Main {
 
                     break;
                 case 9:
-
+                    calculationQuadraticEquation();
                     break;
                 case 10:
 
                     break;
                 case 11:
-
+                    fibonacciSeries();
                     break;
                 case 12:
 
@@ -229,4 +229,61 @@ public class Main {
             print("No prime numbers found in the range.");
         }
     }
-}
+    public static void greatestCommonDivisor(){
+        print("Enter a Two Number for GCD: ");
+        int sum = 0;
+        int numOne = getInput();
+        int numTwo = getInput();
+        if (numTwo > numOne) {
+            sum = numTwo - numOne;
+        }else {
+            sum = numOne - numTwo;
+        }
+        if (numTwo  % sum == 0 && numOne % sum ==0){
+            println(sum);
+        }
+    }
+    public static void calculationQuadraticEquation(){
+        print("Enter  numbers for coefficients A, B and C: ");
+        int numA = getInput();
+        int numB = getInput();
+        int numC = getInput();
+        int sum = ((numB*numB) + (-4 * numA * numC) );
+        if (sum >= 0) {
+            double sqrt = (Math.sqrt(sum));
+            double result1 = ((-numB + sqrt) / (2 * numA));
+            double result2 = ((-numB - sqrt) / (2 * numA));
+            if (result1 == result2) {
+                print("X1 = " + result1);
+            }else{
+                print("X1 = " + result1 +" | " +" X2 = " +result2);
+            }
+        }else {
+            print("Math ERROR, There is no solution");
+        }
+    }
+    public static void calculationCompoundInterest(){
+    }
+    public static void fibonacciSeries(){
+        int result = 1;
+        int fibonacci = 1;
+        System.out.println("Enter a number for fibonacci Series: ");
+        int fibonacciSeries = getInput();
+        for (int i = 1 ; i <= fibonacciSeries ; i+=fibonacci){
+             result = i;
+            if (i ==fibonacciSeries) {
+                break;
+            }
+               fibonacci +=  i;
+               }
+               if (result == fibonacciSeries || fibonacci == fibonacciSeries || fibonacciSeries == 0) {
+                   print("The number is part of the Fibonacci series");
+               }else {
+                   print("The number is NOT part of the Fibonacci series");
+               }
+        }
+    public static void narcissisticNumber (){
+
+        }
+    }
+
