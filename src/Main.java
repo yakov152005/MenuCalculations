@@ -5,9 +5,9 @@ public class Main {
         manuCalculation();
     }
     public static void menuOptions() {
-        System.out.println("|Welcome to the menu|");
-        System.out.println("Please select the desired option:");
-        System.out.println("""
+        print("|Welcome to the menu|");
+        print("Please select the desired option:");
+        print("""
                 1 - Calculation of area and circumference of a circle.
                 2 - Converting temperatures from the Celsius base to the Fahrenheit base and vice versa.
                 3 - Calculation of assembly result.
@@ -22,21 +22,6 @@ public class Main {
                 12 - Printing a narcissistic number.
                 0 - to exit the program.\s""");
     }
-    public static int getInput() {
-        Scanner s = new Scanner(System.in);
-        return s.nextInt();
-    }
-    public static boolean isPrime(int prime) {
-            if (prime <= 1) {
-                return false;
-            }
-            for (int i = 2; i * i <= prime; i++) {
-                if (prime % i == 0) {
-                    return false;
-                }
-            }
-            return true;
-        }
     public static void manuCalculation() {
         while (true) {
             int calculationType = getInput();
@@ -80,57 +65,95 @@ public class Main {
 
                     break;
                 default:
-                    System.out.println("You entered an incorrect number, please try again :)");
+                    print("You entered an incorrect number, please try again :)");
                     break;
             }
             menuOptions();
         }
-        System.out.println("GOOD BYE :)");
+        print("GOOD BYE :)");
+    }
+    public static int getInput() {
+        Scanner s = new Scanner(System.in);
+        return s.nextInt();
+    }
+    public static char getCharacter() {
+        Scanner s = new Scanner(System.in);
+        return s.next().charAt(0);
+    }
+    public static void print(String print) {
+        System.out.println(print);
+    }
+    public static void println(long println) {
+        System.out.println(println);
+    }
+    public static boolean isPrime(int prime) {
+        if (prime <= 1) {
+            return false;
+        }
+        for (int i = 2; i * i <= prime; i++) {
+            if (prime % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
     public static void circleCalculation() {
         double pai = 3.14;
-        System.out.println("Please enter the radius:");
+        print("Please enter the radius:");
         double radius = getInput();
         double scopeCircle = (2 * pai * radius);
         double areaCircle = (pai * (radius * radius));
-        System.out.println("The radius of circle is: " + radius);
-        System.out.println("The Scope Circle is: " + scopeCircle);
-        System.out.println("The Area Circle is: " + areaCircle);
+        print("The radius of circle is: " + radius);
+        print("The Scope Circle is: " + scopeCircle);
+        print("The Area Circle is: " + areaCircle);
     }
     public static void temperatureConversion() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("What is the starting base you want in temperatures (C / F) ?");
-        char ch = s.next().charAt(0);
+        print("What is the starting base you want in temperatures (C / F) ?");
+        char ch = getCharacter();
         if (ch == 'C' || ch == 'c') {
-            System.out.println("Enter the number temperature");
+            print("Enter the number temperature");
             int temperature = getInput();
             double fahrenheit = (temperature * 1.8) + 32;
-            System.out.println("|Fahrenheit| = " + fahrenheit);
+            print("|Fahrenheit| = " + fahrenheit);
         } else if (ch == 'F' || ch == 'f') {
-            System.out.println("Enter the number temperature");
+            print("Enter the number temperature");
             int temperature = getInput();
             double result = ((temperature - 32) * 5);
             double celsius = result / 9;
-            System.out.println("|Celsius| = " + celsius);
+            print("|Celsius| = " + celsius);
         } else {
-            System.out.println("character does not exist");
+            print("character does not exist");
         }
     }
-    public static void assemblyCalculation() {
-        System.out.println("Enter a number for assembly result calculation: ");
-        int assembly = getInput();
-        long counter = 1;
-        for (int i = 1; i <= assembly; i++) {
-            counter = counter * i;
+    public static boolean isNegativeNumber(int number){
+        return  number <= 0;
+    }
+    public static long calculateFactorial(int number){
+        long factorial = 1;
+        for (int i = 1 ; i <= number; i++){
+            factorial *= i;
         }
-        System.out.println(counter);
+        return factorial;
+    }
+    public static void assemblyCalculation() {
+        boolean temp ;
+        do {
+            print("Enter a positive number for assembly result calculation: ");
+            int assembly = getInput();
+            if (isNegativeNumber(assembly)) {
+                temp =true;
+            }else {
+                println(calculateFactorial(assembly));
+                temp = false;
+            }
+        }while (temp) ;
     }
     public static void sumNaturalNumbers() {
         boolean check = true;
         do {
-            System.out.println("Enter the start: ");
+            print("Enter the start: ");
             int start = getInput();
-            System.out.println("Enter the end: ");
+            print("Enter the end: ");
             int end = getInput();
             int sum = 0;
             if (start < end) {
@@ -144,51 +167,66 @@ public class Main {
                     check = false;
                 }
             } else {
-                System.out.println("Please insert numbers that are not equal to each other!");
+                print("Please insert numbers that are not equal to each other!");
                 continue;
             }
-            System.out.println("The sum of natural numbers in the range is: " + sum);
+            print("The sum of natural numbers in the range is: " + sum);
         } while (check);
     }
     public static void primeNumber() {
-        System.out.println("Enter a positive whole number: ");
+        print("Enter a positive whole number: ");
         int prime = getInput();
         if (prime > 0) {
             if (isPrime(prime)) {
-                System.out.println("The number: " + prime + " is a prime number");
+                print("The number: " + prime + " is a prime number");
             } else {
-                System.out.println("The number: " + prime + " is NOT a prime number");
+                print("The number " + prime + " is NOT a prime number");
             }
-        }else {
-            System.out.println("You entered an incorrect number");
+        } else {
+            print("You entered an incorrect number");
         }
     }
+    public static boolean isFiveDigitsNumber(int number){
+        return number>=10000 && number <=99999;
+        }
+    public static boolean isPalindromeNumber(int number){
+                int originalNum = number;
+                int reversNum = 0;
+                while (number > 0){
+                    int digit = number %10;
+                    reversNum = reversNum *10 +digit;
+                    number /=10;
+                }
+                return  originalNum == reversNum;
+            }
     public static void fiveDigitPalindromeNumber() {
-        //System.out.println("Enter a Five-digit number: ");
-        // int palindrome = getInput();
+        boolean temp = false;
+        do {
+            print("Enter a Five-digit number:");
+            int palindrome = getInput();
+            if (isFiveDigitsNumber(palindrome)) {
+                temp = true;
+                if (isPalindromeNumber(palindrome)) {
+                    print("| The number is palindrome |");
+                } else {
+                    print("|The number is NOT palindrome |");
+                }
+            }
+        }while (!temp);
     }
     public static void primeNumbersRange() {
-        System.out.println("Enter a Start number: ");
+        print("Enter a Start number: ");
         int start = getInput();
-        System.out.println("Enter a end number: ");
+        print("Enter a end number: ");
         int end = getInput();
         boolean foundPrimes = false;
         for (int i = start; i <= end; i++) {
             if (isPrime(i)) {
                 System.out.println(i);
-                foundPrimes =true;
+                foundPrimes = true;
             }
+        }if (!foundPrimes) {
+            print("No prime numbers found in the range.");
         }
-        if (!foundPrimes) {
-            System.out.println("No prime numbers found in the range.");
-        }
-
     }
 }
-
-
-
-
-
-
-
