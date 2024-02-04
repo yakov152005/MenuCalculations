@@ -50,19 +50,19 @@ public class DiverseCalculationMenu  {
 					primeNumbersRange();
 					break;
 				case 8:
-
+					greatestCommonDivisor();
 					break;
 				case 9:
 					calculationQuadraticEquation();
 					break;
 				case 10:
-					calculationCompoundInterest();
+					calculateCompoundInterest();
 					break;
 				case 11:
 					fibonacciSeries();
 					break;
 				case 12:
-
+					narcissisticNumber();
 					break;
 				default:
 					print("You entered an incorrect number, please try again :)");
@@ -75,6 +75,14 @@ public class DiverseCalculationMenu  {
 	public static int getInput() {
 		Scanner s = new Scanner(System.in);
 		return s.nextInt();
+	}
+	public static double getDoubleInput(){
+		Scanner d = new Scanner(System.in);
+		return d.nextDouble();
+	}
+	public static long getLongInput(){
+		Scanner l = new Scanner(System.in);
+		return l.nextLong();
 	}
 	public static char getCharacter() {
 		Scanner s = new Scanner(System.in);
@@ -100,7 +108,7 @@ public class DiverseCalculationMenu  {
 	public static void circleCalculation() {
 		double pai = 3.14;
 		print("Please enter the radius:");
-		double radius = getInput();
+		double radius = getDoubleInput();
 		double scopeCircle = (2 * pai * radius);
 		double areaCircle = (pai * (radius * radius));
 		print("The radius of circle is: " + radius);
@@ -229,19 +237,20 @@ public class DiverseCalculationMenu  {
 			print("No prime numbers found in the range.");
 		}
 	}
+	public static void findDivisorForGcd(int number1, int number2){
+		int highestDivisorNumber =0;
+		for (int i = 1; i <= number1; i++) {
+			if (number1 % i == 0 && number2 % i== 0) {
+				highestDivisorNumber = i;
+			}
+		}
+		print("The highest divisor is: " + highestDivisorNumber);
+	}
 	public static void greatestCommonDivisor(){
 		print("Enter a Two Number for GCD: ");
-		int sum = 0;
 		int numOne = getInput();
 		int numTwo = getInput();
-		if (numTwo > numOne) {
-			sum = numTwo - numOne;
-		}else {
-			sum = numOne - numTwo;
-		}
-		if (numTwo  % sum == 0 && numOne % sum ==0){
-			println(sum);
-		}
+		findDivisorForGcd(numOne, numTwo);
 	}
 	public static void calculationQuadraticEquation(){
 		print("Enter  numbers for coefficients A, B and C: ");
@@ -262,24 +271,26 @@ public class DiverseCalculationMenu  {
 			print("Math ERROR, There is no solution");
 		}
 	}
-	public static void calculationCompoundInterest(){
+	public static void calculateCompoundInterest() {
 		print("Enter the initial investment amount: ");
-		double initialInvestment = getInput();
+		double initialInvestment = getDoubleInput();
 		print("Enter the regular monthly interest amount.");
-		double interestAmount = getInput();
-		interestAmount = (interestAmount / 100) +1;
-		double initialInvestmentWithInterest ;
-		for (int i = 3; i <= 38 ; i+=3) {
-			initialInvestment *= interestAmount;
-			if (i == 12 || i == 24 || i == 36){
-				initialInvestmentWithInterest = (int) initialInvestment;
-			}else {
-				final double FUND_OFFSET = 0.5;
-				initialInvestmentWithInterest = (int) initialInvestment * FUND_OFFSET;
+		double monthlyInterestRate = getDoubleInput();
+		monthlyInterestRate = (monthlyInterestRate / 100) + 1;
+		double initialInvestmentWithInterest;
+		double unChangedInitialInvestment = initialInvestment;
+			for (int month = 1; month <= 36; month++) {
+				initialInvestment *= monthlyInterestRate;
+				if (month == 12 || month == 24 || month == 36) {
+					initialInvestmentWithInterest = (int)initialInvestment;
+				} else {
+					final double FUND_OFFSET = 0.5;
+					initialInvestmentWithInterest =(int)((initialInvestment - unChangedInitialInvestment) * FUND_OFFSET) + unChangedInitialInvestment;
+				}if (month % 3 ==0){
+					System.out.println("Your amount of money to withdraw after " + month + " is: " +initialInvestmentWithInterest);
+				}
 			}
-			System.out.println(initialInvestmentWithInterest);
 		}
-	}
 	public static void fibonacciSeries(){
 		int result = 1;
 		int fibonacci = 1;
@@ -299,16 +310,45 @@ public class DiverseCalculationMenu  {
 		}
 	}
 	public static void narcissisticNumber (){
+		print("Enter a positive whole number: ");
+		long narcissisticNum = getLongInput();
+		boolean isNarcissistic = isNarcissistic(narcissisticNum);
+		if (isNarcissistic){
+			print("The number:" + narcissisticNum + " is a narcissistic number");
+		}else {
+			long closestNarcissisticNumber = findClosestNarcissistic(narcissisticNum);
+			print("The closest narcissistic number is: " + closestNarcissisticNumber);
+		}
+	}
+	public static boolean isNarcissistic(long number){
+		long originalNumber = number;
+		int digitCount = 0;
+		double sumOfPowers = 0;
 
+		while (number>0){
+			number /=10;
+			digitCount++;
+		}
+		number =  originalNumber;
+		while (number>0){
+			int digit = (int) (number % 10);
+			sumOfPowers += Math.pow(digit, digitCount);
+			number /=10;
+		}
+		return originalNumber == sumOfPowers;
+	}
+	public static long findClosestNarcissistic(long number) {
+		long lowerBound = number;
+		long upperBound = number;
+		while (true){
+			if (isNarcissistic(lowerBound)){
+				return lowerBound;
+			}
+			if (isNarcissistic(upperBound)){
+				return  upperBound;
+			}
+			lowerBound--;
+			upperBound ++;
+		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
