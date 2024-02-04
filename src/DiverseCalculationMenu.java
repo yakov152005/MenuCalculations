@@ -56,7 +56,7 @@ public class DiverseCalculationMenu  {
 					calculationQuadraticEquation();
 					break;
 				case 10:
-
+					calculationCompoundInterest();
 					break;
 				case 11:
 					fibonacciSeries();
@@ -263,8 +263,22 @@ public class DiverseCalculationMenu  {
 		}
 	}
 	public static void calculationCompoundInterest(){
-		int initialInvestment = getInput();
+		print("Enter the initial investment amount: ");
+		double initialInvestment = getInput();
+		print("Enter the regular monthly interest amount.");
 		double interestAmount = getInput();
+		interestAmount = (interestAmount / 100) +1;
+		double initialInvestmentWithInterest ;
+		for (int i = 3; i <= 38 ; i+=3) {
+			initialInvestment *= interestAmount;
+			if (i == 12 || i == 24 || i == 36){
+				initialInvestmentWithInterest = (int) initialInvestment;
+			}else {
+				final double FUND_OFFSET = 0.5;
+				initialInvestmentWithInterest = (int) initialInvestment * FUND_OFFSET;
+			}
+			System.out.println(initialInvestmentWithInterest);
+		}
 	}
 	public static void fibonacciSeries(){
 		int result = 1;
@@ -285,6 +299,7 @@ public class DiverseCalculationMenu  {
 		}
 	}
 	public static void narcissisticNumber (){
+
 	}
 }
 
