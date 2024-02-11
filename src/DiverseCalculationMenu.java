@@ -274,7 +274,7 @@ public class DiverseCalculationMenu  {
 	public static void calculateCompoundInterest() {
 		print("Enter the initial investment amount: ");
 		double initialInvestment = getDoubleInput();
-		print("Enter the regular monthly interest amount.");
+		print("Enter the regular monthly interest amount:");
 		double monthlyInterestRate = getDoubleInput();
 		monthlyInterestRate = (monthlyInterestRate / 100) + 1;
 		double initialInvestmentWithInterest;
@@ -314,7 +314,7 @@ public class DiverseCalculationMenu  {
 		long narcissisticNum = getLongInput();
 		boolean isNarcissistic = isNarcissistic(narcissisticNum);
 		if (isNarcissistic){
-			print("The number:" + narcissisticNum + " is a narcissistic number");
+			print("The number: " + narcissisticNum + " is a narcissistic number");
 		}else {
 			long closestNarcissisticNumber = findClosestNarcissistic(narcissisticNum);
 			print("The closest narcissistic number is: " + closestNarcissisticNumber);
@@ -323,7 +323,7 @@ public class DiverseCalculationMenu  {
 	public static boolean isNarcissistic(long number){
 		long originalNumber = number;
 		int digitCount = 0;
-		double sumOfPowers = 0;
+		long sumOfPowers = 0;
 
 		while (number>0){
 			number /=10;
@@ -332,7 +332,7 @@ public class DiverseCalculationMenu  {
 		number =  originalNumber;
 		while (number>0){
 			int digit = (int) (number % 10);
-			sumOfPowers += Math.pow(digit, digitCount);
+			sumOfPowers += power(digit, digitCount);
 			number /=10;
 		}
 		return originalNumber == sumOfPowers;
@@ -350,5 +350,12 @@ public class DiverseCalculationMenu  {
 			lowerBound--;
 			upperBound ++;
 		}
+	}
+	public static long power(int base, int exponent) {
+		long result = 1;
+		for (int i = 0; i < exponent; i++) {
+			result *= base;
+		}
+		return result;
 	}
 }
