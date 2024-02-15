@@ -126,19 +126,29 @@ public class DiverseCalculationMenu  {
 		print("The Scope Circle is: " +area);
 		print("The Area Circle is: " + scope);
 	}
+	public static double celsiusToFahrenheit(int temperature){
+		double fahrenheit;
+		fahrenheit= (temperature * 1.8) + 32;
+		return fahrenheit;
+	}
+	public static double fahrenheitToCelsius(int temperature){
+		double celsius, finalCelsius;
+		celsius = ((temperature - 32) * 5);
+		finalCelsius = celsius / 9;
+		return finalCelsius;
+	}
 	public static void temperatureConversion() {
 		print("What is the starting base you want in temperatures (C / F) ?");
 		char ch = getCharacter();
 		if (ch == 'C' || ch == 'c') {
-			print("Enter the number temperature");
+			print("Enter the number temperature:");
 			int temperature = getInput();
-			double fahrenheit = (temperature * 1.8) + 32;
+			double fahrenheit = celsiusToFahrenheit(temperature);
 			print("|Fahrenheit| = " + fahrenheit);
 		} else if (ch == 'F' || ch == 'f') {
-			print("Enter the number temperature");
+			print("Enter the number temperature:");
 			int temperature = getInput();
-			double result = ((temperature - 32) * 5);
-			double celsius = result / 9;
+			double celsius = fahrenheitToCelsius(temperature);
 			print("|Celsius| = " + celsius);
 		} else {
 			print("character does not exist");
