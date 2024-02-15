@@ -105,15 +105,26 @@ public class DiverseCalculationMenu  {
 		}
 		return true;
 	}
+	public static double scopeCircle(double radius){
+		final double PAI = 3.14;
+		double scope;
+		scope= (2 * PAI * radius);
+		return scope;
+	}
+	public static double areaCircle(double radius){
+		final double PAI = 3.14;
+		double area;
+		area = (PAI * (radius * radius));
+		return area;
+	}
 	public static void circleCalculation() {
-		double pai = 3.14;
 		print("Please enter the radius:");
 		double radius = getDoubleInput();
-		double scopeCircle = (2 * pai * radius);
-		double areaCircle = (pai * (radius * radius));
+		double scope = scopeCircle(radius);
+		double area = areaCircle(radius);
 		print("The radius of circle is: " + radius);
-		print("The Scope Circle is: " + scopeCircle);
-		print("The Area Circle is: " + areaCircle);
+		print("The Scope Circle is: " +area);
+		print("The Area Circle is: " + scope);
 	}
 	public static void temperatureConversion() {
 		print("What is the starting base you want in temperatures (C / F) ?");
